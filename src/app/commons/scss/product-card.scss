@@ -1,0 +1,27 @@
+.product-card{
+	display:flex;
+	flex-direction:row;
+	justify-content:space-around;
+	flex-wrap:wrap;
+
+    .goods{
+        width:180px;
+        display:flex;
+        flex-direction:column;
+        justify-content:space-between;
+        align-items:center;
+        border:1px solid #ddd;
+        border-radius:5px;
+        margin:10px;
+        padding-bottom:20px;
+        font-size:smaller;
+        color:#666666;
+        cursor:pointer;
+
+        img{
+            width:174px;
+            margin:3px 3px 20px 3px;
+            border-radius:3px;
+        }
+    }
+}
