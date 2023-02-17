@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ValuesService } from '../commons/service/values.service';
 
@@ -13,7 +13,7 @@ export class DataAnalysisComponent implements OnInit {
   public apps = ["Seene Meter","Seene Meter1"];
   // public currentApp: string;
   public appIndex: number;
-  range: FormGroup;
+  range: UntypedFormGroup;
   constructor(
     private vs: ValuesService,
     private router: ActivatedRoute,
@@ -22,9 +22,9 @@ export class DataAnalysisComponent implements OnInit {
     const today = new Date();
     const month = today.getMonth();
     const year = today.getFullYear();
-    this.range = new FormGroup({
-      start: new FormControl(new Date(year, month, 13)),
-      end: new FormControl(new Date(year, month, 13)),
+    this.range = new UntypedFormGroup({
+      start: new UntypedFormControl(new Date(year, month, 13)),
+      end: new UntypedFormControl(new Date(year, month, 13)),
     });
     // this.currentApp = this.apps[0];
     this.appIndex = 0;
