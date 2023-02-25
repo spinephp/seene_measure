@@ -74,6 +74,14 @@
     align-items: center;
   }
 
+  footer p a{
+    padding: 0 10px 0 10px;
+  }
+
+  footer p:last-child {
+    padding-top: 15px;
+  }
+
   svg#clouds {
     position: fixed;
     bottom: -160px;
@@ -87,11 +95,12 @@
 <!-- Toolbar -->
 <div id='top'>
   <div id="topheader">
-    <div id="title"><p>{{'Seene Meter' | translate:languageid}}</p>
+    <div id="title"><p>{{'Seene Measure' | translate:languageid}}</p>
     <p [hidden]="!logined">
       <a routerLink="/data-analysis">{{'Data analysis' | translate:languageid}}</a>
       <a routerLink="/message-push">{{'Message push' | translate:languageid}}</a>
     </p></div>
+    <div>
       <!--绑定主菜单的头像-->
       <button mat-button [matMenuTriggerFor]="menu">
         <img class="user-icon" src="{{rooturl}}images/user/{{logined? aLoginer.value('picture') : 'noimg.png'}}" width="45" height="45"/>
@@ -125,7 +134,7 @@
           <span>{{item.names[i]}}</span>
         </button>
       </mat-menu>
-      
+    </div>
       <!-- <ul>
         <li>
           <div class="dropdown">

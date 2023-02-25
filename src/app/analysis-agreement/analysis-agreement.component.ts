@@ -9,7 +9,7 @@ import { ValuesService } from '../commons/service/values.service';
   styleUrls: ['./analysis-agreement.component.scss']
 })
 export class AnalysisAgreementComponent implements OnInit {
-  public languageid: number;
+  public languageid: number=0;
 
   constructor(
     private ls: LocalStorage,

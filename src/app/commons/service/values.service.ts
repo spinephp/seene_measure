@@ -12,7 +12,7 @@ export class ValuesService {
   private xqiye: Subject<any> = new Subject<any>();
   private xLoginer: Subject<LoginerData> = new Subject<LoginerData>();
   private currentLanguageIdData: number | undefined;
-  private currentLoginerData: LoginerData;
+  private currentLoginerData?: LoginerData;
   constructor() {
     this.setLoginer(undefined);
   }
@@ -41,14 +41,15 @@ export class ValuesService {
       return this.xqiye.asObservable();
   }
 
-  public setLoginer(selectedPointsIfo: LoginerData): void {
-    this.xLoginer.next(selectedPointsIfo);
+  public setLoginer(selectedPointsIfo?: LoginerData): void {
+    if(selectedPointsIfo!=null)this.xLoginer.next(selectedPointsIfo);
     this.currentLoginerData = selectedPointsIfo;
   }
 
   public currentLoginer(): Observable<LoginerData> {
+    
     setTimeout(() => {
-      this.xLoginer.next(this.currentLoginerData); }
+      if(this.currentLoginerData!=null)this.xLoginer.next(this.currentLoginerData!); }
     , 30);
     return this.xLoginer.asObservable();
   }

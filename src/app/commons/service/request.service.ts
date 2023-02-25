@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {SettingsService} from './settings.service';
-import { headersToString } from 'selenium-webdriver/http';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,32 +28,35 @@ export class RequestService {
 //       }
 //     }
 
-  getUrl(cmd: string, filter: string[], condition: object[] = null) {
-    const url = {};
-    const cmdstr = `?cmd=${cmd}`;
+  getUrl(cmd: string, filter: string[], condition?: object[]) {
     const data = {token: this.ss.sessionid, filter: '', cond: ''};
+    const url = {cmdkey:data};
+    const cmdstr = `?cmd=${cmd}`;
     if (filter && filter.length > 0) {
       data.filter = JSON.stringify(filter);
     }
     if (condition && condition.length > 0) {
       data.cond = JSON.stringify(condition);
     }
-    url[cmdstr] = data;
+    url[cmdstr as keyof typeof url] = data;
     return url;
   }
 
-  _get(param) {
-    function success(data) {
+  _get(param: {}[]) {
+    function success(data: any) {
       return data;
     }
 
-    function error(err) {
+    function error(err:string) {
       alert('error occured!\n' + err);
     }
     const promises = [];
     for (const i of Object.keys(param)) {
-      for (const k of Object.keys(param[i])) {
-        promises.push(this.get(this.ss.baseUrl + k, param[i][k]).then(success, error));
+      const ii = i as keyof typeof param;
+      const itype = param[ii];
+      for (const k of Object.keys(itype)) {
+        if(k==='cmdkey') continue;
+        promises.push(this.get(this.ss.baseUrl + k, param[ii][k as keyof typeof itype]).then(success, error));
       }
     }
     return promises;
@@ -66,8 +69,7 @@ export class RequestService {
    * @returns Promise<R>|Promise<U> 返回数据
    */
   public get(url: string, params: any): any {
-    return this.http.get(url, {params})
-      .toPromise()
+    return  lastValueFrom(this.http.get(url, {params}))
       .then(res => this.handleSuccess(res))
       .catch(res => this.handleError(res));
   }
@@ -78,11 +80,14 @@ export class RequestService {
    * @param params 参数
    * @returns Promise<R>|Promise<U> 返回数据
    */
-  public post(url: string, params: any) {
-    return this.http.post(url, params, this.options)
-      .toPromise()
-      .then(res => this.handleSuccess(res))
-      .catch(res => this.handleError(res));
+  public async post(url: string, params: any) {
+    try {
+      const res = await lastValueFrom(this.http.post(url, params, this.options));
+        // .toPromise();
+      return this.handleSuccess(res);
+    } catch (res_1) {
+      return await this.handleError(res_1);
+    }
   }
 
   /**
@@ -91,11 +96,14 @@ export class RequestService {
    * @param params 参数
    * @returns Promise<R>|Promise<U> 返回数据
    */
-  public put(url: string, params: any) {
-    return this.http.post(url, params, this.options)
-      .toPromise()
-      .then(res => this.handleSuccess(res))
-      .catch(res => this.handleError(res));
+  public async put(url: string, params: any) {
+    try {
+      const res = await lastValueFrom(this.http.post(url, params, this.options));
+        // .toPromise();
+      return this.handleSuccess(res);
+    } catch (res_1) {
+      return await this.handleError(res_1);
+    }
   }
 
   /**

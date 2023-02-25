@@ -16,9 +16,9 @@ import { RegisterComponent } from './register/register.component';
   providers: [TranslatePipe]
 })
 export class AppComponent {
-  public languageid: number;
+  public languageid: number=0;
   public aLoginer: ALoginer;
-  public languages = [];
+  public languages?:[{id:string,names:[string]}];
   public rooturl: string;
   public cdate: Date;
   constructor(
@@ -31,7 +31,7 @@ export class AppComponent {
     public dialog: MatDialog
   ) {
     this.rooturl = ss.rootUrl;
-    this.aLoginer = new ALoginer(null);
+    this.aLoginer = new ALoginer(undefined);
     this.languageid = 0;
     this.cdate = new Date();
   }
@@ -44,7 +44,7 @@ export class AppComponent {
     // $('[data-toggle="tooltip"]').tooltip();
     // this.vs.setLanguageId(+this.ls.get('languageid'));
     this.vs.currentLanguageId().subscribe((value: number) => {
-      if(that.languageid !== value){
+      if(that.languageid !== value && !isNaN(value)){
         that.languageid = value;
       }
       // that.cdr.detectChanges();
@@ -54,7 +54,7 @@ export class AppComponent {
       if (value === undefined || value === null) {
         that.logined = false;
         that.logtext = 'Sign in';
-        that.aLoginer = new ALoginer(null);
+        that.aLoginer = new ALoginer(undefined);
       } else { // 登录成功
         that.logined = true;
         that.logtext = 'Sign out';
@@ -64,13 +64,15 @@ export class AppComponent {
     this.headerService.heart().then(res => {
       const sok = 'ok';
       const sdata = 'data';
-      if (res[sok] === true) {
-        that.ls.set('publickey', res[sdata][0].token);
-        that.ls.set('sessionid', res[sdata][0].sessionid);
-        that.ss.sessionid = res[sdata][0].sessionid;
+      if (res[sok as keyof typeof res] === true) {
+        const _res = res[sdata as keyof typeof res];
+        const item = _res[0] as {login:boolean,sessionid:string,token:string};
+        that.ls.set('publickey', item.token);
+        that.ls.set('sessionid', item.sessionid);
+        that.ss.sessionid = item.sessionid;
       } else {
         const serror = 'error';
-        console.log(res[serror]);
+        console.log(res[serror as keyof typeof res]);
         that.ss.sessionid = that.ls.get('sessionid');
       }
       // that.languages = [
@@ -81,10 +83,10 @@ export class AppComponent {
         // console.log(JSON.stringify(rs));
         const sqq = 'qq';
         if (rs[1] !== undefined) {
-          that.languages = rs[1];
+          that.languages = rs[1] as [{id:string,names:[string]}];
           // console.log(JSON.stringify(rs[1]));
         }
-        that.ls.set(sqq, rs[0][0][sqq]);
+        that.ls.set(sqq, rs[0][0][sqq as keyof typeof rs[0][0]]);
         // const lid = that.ls.get('languageid') || 1;
         // that.selectChangeLanguage(lid);
       });
@@ -113,9 +115,9 @@ export class AppComponent {
   logout() {
     const that = this;
     // 登出
-    if (this.logined && this.aLoginer!=undefined && +this.aLoginer.item.id > 0) {
+    if (this.logined && this.aLoginer!=undefined && +this.aLoginer.item!.id > 0) {
       const param = {
-        user: this.aLoginer.item.name,
+        user: this.aLoginer.item!.name,
         action: 'custom_logout',
         token: this.ls.get('sessionid')
       };

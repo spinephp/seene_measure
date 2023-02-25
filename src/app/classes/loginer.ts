@@ -11,7 +11,7 @@ export interface LoginerData {
 }
 
 export class ALoginer extends AItem<LoginerData> {
-    constructor(data: LoginerData) {
+    constructor(data: LoginerData|undefined) {
         super(data);
     }
 }

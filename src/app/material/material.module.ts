@@ -35,7 +35,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDividerModule } from '@angular/material/divider';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { TranslatePipe } from '../translate.pipe';
+// import { TranslatePipe } from '../translate.pipe';
 // import { RegisterComponent } from '../register/register.component';
 import {CdkTableModule} from '@angular/cdk/table';
 
@@ -77,7 +77,7 @@ const Material = [
 
 @NgModule({
   declarations: [
-    TranslatePipe,
+    // TranslatePipe,
     // RegisterComponent
   ],
   imports: [
@@ -90,14 +90,14 @@ const Material = [
   ],
   providers: [
   // MatIconRegistry,
-  TranslatePipe,
+  // TranslatePipe,
 ],
   exports: [
-    TranslatePipe,
+    // TranslatePipe,
     Material]
 })
 export class MaterialModule {
-  constructor(private matIconRegistry: MatIconRegistry) {
-      this.matIconRegistry.registerFontClassAlias('fontawesome', 'fa');
-  }
+  // constructor(private matIconRegistry: MatIconRegistry) {
+  //     this.matIconRegistry.registerFontClassAlias('fontawesome', 'fa');
+  // }
 }

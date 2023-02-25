@@ -9,3 +9,5 @@ import { TranslatePipe } from '../translate.pipe';
   exports:  [TranslatePipe]
 })
 export class PipeModule { }
+export { TranslatePipe };
+

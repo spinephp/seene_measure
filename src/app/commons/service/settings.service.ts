@@ -8,22 +8,22 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SettingsService {
-  private xdatas = {};
+  private xdatas={};
   private xlanguages: Subject<{}> = new Subject<{}>();
-  public languages;
+  public languages={};
   constructor(private ls: LocalStorage) { }
   // rootUrl = 'http://www.yrr8.com/woo/';
   // rootUrl = 'http://127.0.0.1/woo/';
   // rootUrl = 'http://192.168.1.107/woo/'; // 服务器无线
-  rootUrl = 'http://192.168.1.22/woo/';  // 服务器有线
-  // rootUrl = 'http://192.168.1.30/woo/';  // 服务器有线
+  // rootUrl = 'http://192.168.1.22/woo/';  // 服务器有线
+  rootUrl = 'http://192.168.1.30/woo/';  // 服务器有线
   baseUrl = this.rootUrl + 'index.php';
   imgUrl = this.rootUrl + 'images/';
   sessionid = this.ls.get('sessionid') || '';
   language0: {} = {// 页眉
-    'Seene Meter': ['蘑菇仪表'],
-    'Seene meter': ['蘑菇仪表'],
-    'seend meter': ['蘑菇仪表'],
+    'Seene Measure': ['蘑菇测量'],
+    'Seene measure': ['蘑菇测量'],
+    'seene measure': ['蘑菇测量'],
     Language: ['语言'],
     'Sign in': ['登录'],
     'Sign out': ['退出登录'],
@@ -71,21 +71,22 @@ export class SettingsService {
   public getLanguages(): Observable<{}> {
       return this.xlanguages.asObservable();
   }
-  setLanguage = function(language: {}) {
+  setLanguage = (language: {}) => {
     this.languages = Object.assign(language, this.language0);
   };
-  getLanguage = function(): {} {
-    return this.languages;
-  };
-  set = function(name: string, value: any) {
-    this.xdatas[name] = value;
-  };
-  get = function(name: string) {
-    return this.xdatas[name];
-  };
-  delete = function(name: string) {
-    if (this._datas[name]) {
-      delete this.xdatas[name];
+  getLanguage = () => this.languages;
+  
+  set = (name: string, value: never) => {
+    const en = name as keyof typeof this.xdatas;
+    this.xdatas[en] = value;
+  }
+  
+  get = (name: string) => this.xdatas[name as keyof typeof this.xdatas];
+  
+  delete = (name: string) => {
+    const en = name as keyof typeof this.xdatas;
+    if (this.xdatas[en]) {
+      delete this.xdatas[en];
     }
   };
 }

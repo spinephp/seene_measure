@@ -17,6 +17,7 @@ export class SupportComponent implements OnInit {
     private ls: LocalStorage,
     private vs: ValuesService,
     private router: ActivatedRoute,
+    private tr: TranslatePipe,
   ) { }
 
   ngOnInit(): void {

@@ -9,7 +9,7 @@ import { ValuesService } from '../commons/service/values.service';
   styleUrls: ['./user-agreement.component.scss']
 })
 export class UserAgreementComponent implements OnInit {
-  public languageid: number;
+  public languageid: number=0;
   public agreements: any[] = [];
   public agreement: any;
 
@@ -26,7 +26,7 @@ export class UserAgreementComponent implements OnInit {
     // $('[data-toggle="tooltip"]').tooltip();
     // this.vs.setLanguageId(+this.ls.get('languageid'));
     this.vs.currentLanguageId().subscribe((value: number) => {
-      if(that.languageid !== value){
+      if(that.languageid !== value && !isNaN(value)){
         that.languageid = +value;
         that.agreement = that.agreements[value];
       }

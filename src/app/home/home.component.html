@@ -62,13 +62,17 @@
   
     .content {
       display: flex;
-      margin: 82px -100px 32px auto;
+      margin: 22px -100px 32px auto;
       padding: 0 16px;
       max-width: 960px;
       flex-direction: column;
       align-items: center;
     }
   
+    .content div+p{
+      width: 50%;
+      margin-bottom: 10px;
+    }
     svg.material-icons {
       height: 24px;
       width: auto;
@@ -133,6 +137,7 @@
       font-weight: 600;
       border: none;
       width: auto;
+      height:50px;
       min-width: 30%;
       position: relative;
     }
@@ -152,7 +157,7 @@
       width: 80px;
       position: absolute;
       left: -10px;
-      top: -24px;
+      top: -14px;
     }
   
     svg#rocket-smoke {
@@ -167,14 +172,19 @@
       width: 250px;
       position: absolute;
       top: 30px;
-      left: 160px;
+      left: calc(25% - 125px);
       z-index: 0;
+    }
+    picture{
+      position: absolute;
+      /* clip:rect(154px calc(25% - 330px) 200px calc(25% - 110px)); */
+      top: 154px;
+      left: calc(25% - 110px);
     }
     img.level {
       width: 220px;
-      position: absolute;
-      top: 154px;
-      left: 175px;
+      /* position: absolute; */
+      /* clip:rect(0px 220px 200px 0px); */
       z-index: 1;
     }
     a,
@@ -335,7 +345,7 @@
         </g>
       </svg> -->
   
-      <span>{{ title | translate:languageid }}</span>
+      <span>{{ "Functions and features" | translate:languageid }}</span>
   
       <svg id="rocket-smoke" alt="Rocket Ship Smoke" xmlns="http://www.w3.org/2000/svg" width="516.119" height="1083.632" viewBox="0 0 516.119 1083.632">
         <path id="Path_40" data-name="Path 40" d="M644.6,141S143.02,215.537,147.049,870.207s342.774,201.755,342.774,201.755S404.659,847.213,388.815,762.2c-27.116-145.51-11.551-384.124,271.9-609.1C671.15,139.365,644.6,141,644.6,141Z" transform="translate(-147.025 -140.939)" fill="#f5f5f5"/>
@@ -344,8 +354,8 @@
     </div>
   
     <!-- Resources -->
-    <h3>{{ "Functions and features" | translate:languageid }}</h3>
-    <p>{{ "The seene meter is a level measurement app that supports Android, iPhone and iPad:" | translate:languageid }}:</p>
+    <!-- <h3>{{ "Functions and features" | translate:languageid }}</h3> -->
+    <p>{{ "The seene measure is a relative size measurement app that supports Android, iPhone and iPad:" | translate:languageid }}:</p>
 <!--- SVG IMAGE --->
 <svg version="1.1" id="iphone" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink" x="0px" y="0px" width="316px" height="640px" viewBox="0 0 316 640" enable-background="new 0 0 316 640" xml:space="preserve">
   <g>
@@ -376,7 +386,12 @@
   <circle cx="158" cy="603" r="22" stroke="#cccccc" stroke-width="2" fill="none"/>
 </svg>
 <!--- END SVG IMAGE --->
-<img class="level" src="assets/iphonew.png" />
+<picture>
+  <ng-container *ngFor="let img of images;index as i">
+    <img class="level" *ngIf="i===imageIndex" [src]='img' [@slide]="'flyin'" (@slide.done)="onDone()"/>
+  </ng-container>
+</picture>
+<!-- <img class="level" src="assets/{{currentImage}}.png" [@slide]="state" (@slide.done)="onDone($event)"/> -->
     <!-- <div class="card-container">
       <a class="card" target="_blank" rel="noopener" href="https://angular.io/tutorial">
         <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
@@ -406,17 +421,17 @@
     <!-- Next Steps -->
     <!-- <h2>Next Steps</h2> -->
     <ol>
-      <li>{{ "Levelness measurement" | translate:languageid }}</li>
-      <li>{{ "Absolute and relative angles measurement" | translate:languageid }}</li>
-      <li>{{ "The measured value can be recorded and can be viewed, edited, shared and counted" | translate:languageid }}</li>
-      <li>{{ "Continuous recording and playback of measured values" | translate:languageid }}</li>
-      <li>{{ "Alarm function" | translate:languageid }} 
+      <li>{{ "Relative dimension measurement and dimensioning" | translate:languageid }}</li>
+      <li>{{ "Scanner" | translate:languageid }}</li>
+      <li>{{ "Measurement object extraction and editing" | translate:languageid }}</li>
+      <li>{{ "Can import png files, png format data in the cutting board and parts in other measurement files" | translate:languageid }}</li>
+      <!-- <li>{{ "Alarm function" | translate:languageid }} 
         <ul>
           <li>{{ "Three alarm areas can be set: point, line and arc" | translate:languageid }}</li>
           <li>{{ "There are three alarm modes of sound, light, vibration and note" | translate:languageid }}</li>
         </ul>
       </li>
-      <li>{{ "Data can be uploaded to the cloud and remotely controlled with couldfield app" | translate:languageid }}</li>
+      <li>{{ "Data can be uploaded to the cloud and remotely controlled with couldfield app" | translate:languageid }}</li> -->
     </ol>
     <!-- <input type="hidden" #selection>
   

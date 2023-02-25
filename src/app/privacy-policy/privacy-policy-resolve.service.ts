@@ -16,13 +16,13 @@ export class PrivacyPolicyResolveService {
     ) {}
   resolve(): {} {
     // 添加要显示的文本，支持国际化
-    this.cv.addLanguages({});
+    // this.cv.addLanguages({});
     
     // return this.ps.get();
     // .then(rs => {
     //   return rs;
     // });
-    return Promise.all(this.ps.get(1)).then(rs => {
+    return Promise.all(this.ps.get(2)).then(rs => {
     //   return of([]).toPromise();
     // }).then(rs => {
       return rs;

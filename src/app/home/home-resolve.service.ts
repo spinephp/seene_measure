@@ -16,16 +16,12 @@ export class HomeResolveService {
   resolve(): {} {
     const word: {} = {
       'Functions and features': ['功能与特点'],
-      'The seene meter is a level measurement app that supports Android, iPhone and iPad:': ['蘑菇水平仪是一款支持安卓、iPhone 和 iPad 的水平度测量 app:'],
-      'Levelness measurement': ['水平度测量'],
-      'Absolute and relative angles measurement': ['绝对与相对角度测量'],
-      'The measured value can be recorded and can be viewed, edited, shared and counted': ['可记录测量值并能对其进行查看、编辑、分享和统计'],
-      'Continuous recording and playback of measured values': ['可对测量值连续录制与回放'],
-      'Alarm function': ['报警功能'],
-      'Three alarm areas can be set: point, line and arc': ['可设置点、线和弧三种报警区域'],
-      'There are three alarm modes of sound, light, vibration and note': ['具有声、光、震动和记录本三种报警方式'],
-      'Data can be uploaded to the cloud and remotely controlled with couldfield app': ['数据可上传到云端，用云端水平仪 app 进行远程控制'],
-      'Download now': ['立即下载'],
+      'The seene measure is a relative size measurement app that supports Android, iPhone and iPad:': ['蘑菇测量是一款支持安卓、iPhone 和 iPad 的相对尺寸测量 app:'],
+      'Relative dimension measurement and dimensioning': ['相对尺寸测量与标注'],
+      'Scanner': ['扫描仪'],
+      'Measurement object extraction and editing': ['测量物体提取与编辑'],
+      'Can import png files, png format data in the cutting board and parts in other measurement files': ['可导入png文件、裁剪板中的png格式数据和其它测量文件中的部件'],
+     'Download now': ['立即下载'],
       'Version 1.0.0 for Android': ['安卓版 1.0.0'],
       Docs: ['文档']
       };

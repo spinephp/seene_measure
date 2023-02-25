@@ -12,7 +12,7 @@ import { TranslatePipe } from '../translate.pipe';
 })
 export class PrivacyPolicyComponent implements OnInit {
   // title = 'Seene Meter';
-  public languageid!: number;
+  public languageid: number=0;
   public privacys!: any[];
   public privacy: any;
   constructor(
@@ -28,7 +28,7 @@ export class PrivacyPolicyComponent implements OnInit {
     // $('[data-toggle="tooltip"]').tooltip();
     // this.vs.setLanguageId(+this.ls.get('languageid'));
     this.vs.currentLanguageId().subscribe((value: number) => {
-      if(that.languageid !== value){
+      if(that.languageid !== value &&!isNaN(value)){
         that.languageid = value;
         that.privacy = that.privacys[value];
       }

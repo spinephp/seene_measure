@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormGroup, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ValuesService } from '../commons/service/values.service';
+import { TranslatePipe } from '../translate.pipe';
 
 @Component({
   selector: 'app-data-analysis',
   templateUrl: './data-analysis.component.html',
-  styleUrls: ['./data-analysis.component.scss']
+  styleUrls: ['./data-analysis.component.scss'],
+  providers: [TranslatePipe]
 })
 export class DataAnalysisComponent implements OnInit {
   public languageid: number=0;

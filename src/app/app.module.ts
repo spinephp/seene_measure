@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,12 +16,15 @@ import { LocalStorage } from './commons/provider/local-storage';
 import { ValuesService } from './commons/service/values.service';
 import { HomeResolveService } from './home/home-resolve.service';
 // import 'jquery';
-import 'bootstrap';
+// import 'bootstrap';
 import { DeviceComponent } from './device/device.component';
 import { UserAgreementComponent } from './user-agreement/user-agreement.component';
 import { AnalysisAgreementComponent } from './analysis-agreement/analysis-agreement.component';
 import { MaterialModule } from './material/material.module';
+import { PipeModule, TranslatePipe } from './pipe/pipe.module';
 import { DataAnalysisComponent } from './data-analysis/data-analysis.component';
+import { RegisterComponent } from './register/register.component';
+import { RegisterModule } from './register/register.module';
 
 @NgModule({
   declarations: [
@@ -37,16 +41,19 @@ import { DataAnalysisComponent } from './data-analysis/data-analysis.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     CommonModule,
     MaterialModule,
+    PipeModule,
+    RegisterModule,
     AppRoutingModule
   ],
   providers: [
     LocalStorage,
     SettingsService,
     ValuesService,
-    // TranslatePipe,
+    TranslatePipe,
     HomeResolveService,
     HeaderService
   ],
